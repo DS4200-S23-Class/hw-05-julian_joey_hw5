@@ -1,0 +1,23 @@
+body {
+    font-family: Arial;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+/* Set additional styling options for the columns */
+.column {
+    float: left;
+}
+
+/* Set width length for the left, right and middle columns */
+.left {
+    width: 60%;
+}
+    
+.right {
+    width: 40%;
+}
