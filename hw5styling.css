@@ -21,3 +21,7 @@ h1 {
 .right {
     width: 40%;
 }
+
+.point:hover {
+    fill: yellow;
+}

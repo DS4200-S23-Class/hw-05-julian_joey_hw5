@@ -1,4 +1,3 @@
-
 // Create a Frame
 const FRAME_HEIGHT = 400;
 const FRAME_WIDTH = 500; 
@@ -14,7 +13,7 @@ const FRAME1 = d3.select("#vis1")
                     .attr("class", "frame"); 
 
 // read data and create plot
-d3.csv("data/scatter-data.csv").then((data) => {
+d3.csv("/data/scatter-data.csv").then((data) => {
 
     console.log(data)
 
@@ -40,12 +39,19 @@ d3.csv("data/scatter-data.csv").then((data) => {
   FRAME1.selectAll("points")  
       .data(data) // passed from .then  
       .enter()       
-      .append("circle")  
+      .append("circle")
         .attr("cx", (d) => { return (X_SCALE2(d.x) + MARGINS.left); }) 
         .attr("cy", (d) => { return (Y_SCALE2(d.y) + MARGINS.bottom); }) 
         .attr("r", 5)
         .attr("class", "point"); 
 
+  d3.selectAll('circle')
+    .on('click', function() {
+      if (d3.select(this).style("stroke", "none")){
+        d3.select(this)
+          .style("stroke", "green");
+        }
+    });
   // Add an axis to the vis  
   FRAME1.append("g") 
         .attr("transform", "translate(" + MARGINS.left + 
@@ -54,3 +60,4 @@ d3.csv("data/scatter-data.csv").then((data) => {
           .attr("font-size", '20px'); 
 
 }); 
+
