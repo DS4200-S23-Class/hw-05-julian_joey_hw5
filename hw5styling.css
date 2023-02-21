@@ -22,6 +22,10 @@ h1 {
     width: 40%;
 }
 
+.point {
+    fill: cyan;
+}
+
 .point:hover {
     fill: yellow;
 }

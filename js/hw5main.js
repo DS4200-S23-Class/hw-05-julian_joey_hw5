@@ -44,7 +44,8 @@ d3.csv("/data/scatter-data.csv").then((data) => {
       .append("circle")
         .attr("cx", (d) => { return (X_SCALE2(d.x) + MARGINS.left); }) 
         .attr("cy", (d) => { return (Y_SCALE2(d.y) + MARGINS.bottom); }) 
-        .attr("r", 5)
+        .attr("r", 10)
+        .attr("fill", "cyan")
         .attr("class", "point"); 
 
   d3.selectAll('circle')
@@ -59,15 +60,25 @@ d3.csv("/data/scatter-data.csv").then((data) => {
         .attr("transform", "translate(" + MARGINS.left + 
               "," + (VIS_HEIGHT + MARGINS.top) + ")") 
         .call(d3.axisBottom(X_SCALE2).ticks(10)) 
-          .attr("font-size", '20px');
-        
-        
+          .attr("font-size", '10px');
           
   FRAME1.append("g") 
         .attr("transform", "translate(" + MARGINS.left + 
               "," + (VIS_HEIGHT - 250) + ")") 
         .call(d3.axisLeft(Y_SCALE2).ticks(10)) 
-          .attr("font-size", '20px');
+          .attr("font-size", '10px');
 
 }); 
+
+const FRAME2 = d3.select("#vis2")
+                  .append("svg")
+                    .attr("height", FRAME_HEIGHT)
+                    .attr("width", FRAME_WIDTH)
+                    .attr("class", "frame");
+
+d3.csv("/data/bar-data.csv").then((data) => {
+
+    console.log(data) 
+    
+});
 
