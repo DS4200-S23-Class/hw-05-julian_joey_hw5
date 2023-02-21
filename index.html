@@ -24,7 +24,34 @@
 
     </div>
     <div class="column right">
+        <p>Last Point Clicked:</p>
         <p id="lastPoint">No Point Has Been Clicked</p>
+        <p>Select the x coordinate of the point you want to add:</p>
+        <select name = "xDropdown" id = "xDropdown" value = "1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <p>Select the y coordinate of the point you want to add:</p>
+        <select name = "yDropdown" id = "yDropdown" value = "1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+
+        <button type="button" onclick="plotPoints()">Add Point</button>
         
     </div>
 

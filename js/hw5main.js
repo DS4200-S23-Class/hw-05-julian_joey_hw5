@@ -50,10 +50,12 @@ d3.csv("/data/scatter-data.csv").then((data) => {
 
   d3.selectAll('circle')
     .on('click', function() {
-      if (d3.select(this).style("stroke", "none")){
+      if (d3.select(this).style("stroke", "none")) {
         d3.select(this)
           .style("stroke", "green");
         }
+      var text = "(" + d3.select(this).attr("cx") + "," + d3.select(this).attr("cy") + ")";
+      document.getElementById("lastPoint").textContent = text;
     });
   // Add an axis to the vis  
   FRAME1.append("g") 
@@ -81,4 +83,3 @@ d3.csv("/data/bar-data.csv").then((data) => {
     console.log(data) 
     
 });
-
