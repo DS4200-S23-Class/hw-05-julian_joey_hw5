@@ -22,20 +22,22 @@ d3.csv("/data/scatter-data.csv").then((data) => {
           // Note: data read from csv is a string, so you need to
           // cast it to a number if needed
 
-   // find max X
+      
+
+   // find max Y
   const MAX_Y2 = d3.max(data, (d) => { return parseInt(d.y); });
   
   // Define scale functions that maps our data values 
   // (domain) to pixel values (range)
   const X_SCALE2 = d3.scaleLinear() 
-                    .domain([0, (MAX_X2)]) // add some padding  
+                    .domain([0, 10]) // add some padding  
                     .range([0, VIS_WIDTH]); 
 
    const Y_SCALE2 = d3.scaleLinear() 
-                    .domain([0, (MAX_Y2)]) // add some padding  
-                    .range([0, VIS_HEIGHT]); 
+                    .domain([0, 10]) // add some padding  
+                    .range([VIS_HEIGHT, 0]); 
 
-  // Use X_SCALE to plot our points
+  // Use scale to plot our points
   FRAME1.selectAll("points")  
       .data(data) // passed from .then  
       .enter()       
@@ -56,8 +58,16 @@ d3.csv("/data/scatter-data.csv").then((data) => {
   FRAME1.append("g") 
         .attr("transform", "translate(" + MARGINS.left + 
               "," + (VIS_HEIGHT + MARGINS.top) + ")") 
-        .call(d3.axisBottom(X_SCALE2).ticks(4)) 
-          .attr("font-size", '20px'); 
+        .call(d3.axisBottom(X_SCALE2).ticks(10)) 
+          .attr("font-size", '20px');
+        
+        
+          
+  FRAME1.append("g") 
+        .attr("transform", "translate(" + MARGINS.left + 
+              "," + (VIS_HEIGHT - 250) + ")") 
+        .call(d3.axisLeft(Y_SCALE2).ticks(10)) 
+          .attr("font-size", '20px');
 
 }); 
 
