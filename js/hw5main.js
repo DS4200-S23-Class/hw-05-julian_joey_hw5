@@ -66,6 +66,40 @@ d3.csv("/data/scatter-data.csv").then((data) => {
 
 }); 
 
+// PLOT POINTS
+
+function plotPoints() {
+  const X_SCALE2 = d3.scaleLinear()
+                    .domain([0, 10]) // add some padding  
+                    .range([0, VIS_WIDTH]);
+   const Y_SCALE2 = d3.scaleLinear()
+                    .domain([0, 10]) // add some padding  
+                    .range([VIS_HEIGHT, 0]);
+  var x = document.getElementById("xDropdown").value;
+  var y = document.getElementById("yDropdown").value;
+  const userData = [(x, y)]
+  FRAME1.selectAll("points")  
+      .data(userData)
+      .enter()      
+      .append("circle")
+        .attr("cx", (d) => { return (X_SCALE2(x) + MARGINS.left); })
+        .attr("cy", (d) => { return (Y_SCALE2(y) + MARGINS.bottom); })
+        .attr("r", 10)
+        .attr("fill", "cyan")
+        .attr("class", "point");
+d3.selectAll('circle')
+    .on('click', function() {
+      if (d3.select(this).style("stroke", "none")) {
+        d3.select(this)
+          .style("stroke", "green");
+        }
+      var text = "(" + String((d3.select(this).attr("cx") - MARGINS.left) / 40) + "," + String(10 - (d3.select(this).attr("cy") - MARGINS.bottom) / 30)+ ")";
+      document.getElementById("lastPoint").textContent = text;
+    });
+  };
+
+
+// BAR PLOT
 const FRAME2 = d3.select("#vis2")
                   .append("svg")
                     .attr("height", FRAME_HEIGHT)
