@@ -24,7 +24,7 @@ const Y_SCALE2 = d3.scaleLinear()
                     .domain([0, 10]) // add some padding  
                     .range([VIS_HEIGHT, 0]); 
 // read data and create plot
-d3.csv("/data/scatter-data.csv").then((data) => {
+d3.csv("data/scatter-data.csv").then((data) => {
 
   // Use scale to plot our points
   FRAME1.selectAll("points")  
@@ -128,7 +128,7 @@ const FRAME2 = d3.select("#vis2")
 
 function build_interactive_barplot() {
                   
-  d3.csv("/data/bar-data.csv").then((data) => {
+  d3.csv("data/bar-data.csv").then((data) => {
 
     console.log(data) 
 
