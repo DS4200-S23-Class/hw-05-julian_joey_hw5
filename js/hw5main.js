@@ -15,18 +15,8 @@ const FRAME1 = d3.select("#vis1")
 // read data and create plot
 d3.csv("/data/scatter-data.csv").then((data) => {
 
-    console.log(data)
+  console.log(data)
 
-  // find max X
-  const MAX_X2 = d3.max(data, (d) => { return parseInt(d.x); });
-          // Note: data read from csv is a string, so you need to
-          // cast it to a number if needed
-
-      
-
-   // find max Y
-  const MAX_Y2 = d3.max(data, (d) => { return parseInt(d.y); });
-  
   // Define scale functions that maps our data values 
   // (domain) to pixel values (range)
   const X_SCALE2 = d3.scaleLinear() 
@@ -78,8 +68,78 @@ const FRAME2 = d3.select("#vis2")
                     .attr("width", FRAME_WIDTH)
                     .attr("class", "frame");
 
-d3.csv("/data/bar-data.csv").then((data) => {
+
+function build_interactive_barplot() {
+                  
+  d3.csv("/data/bar-data.csv").then((data) => {
 
     console.log(data) 
+
+    const X_SCALE2 = d3.scaleBand() 
+                      .domain(data.map(d => d.category)) // add some padding  
+                      .range([0, VIS_WIDTH]);
     
-});
+
+    const Y_SCALE2 = d3.scaleLinear() 
+                      .domain([0, 100]) // add some padding  
+                      .range([VIS_HEIGHT, 0]);
+      
+
+    // Use scale to plot our bars
+    FRAME2.selectAll(".bar")  
+        .data(data) // passed from .then
+        .enter()         
+        .append("rect")
+          .attr("class", "bar")
+          .attr("x", (d) => { return (X_SCALE2(d.category) + 60); })
+          .attr("y", (d) => { return (Y_SCALE2(d.amount) + MARGINS.bottom); })
+          .attr("width", 40)
+          .attr("height", d => VIS_HEIGHT - Y_SCALE2(d.amount));
+
+    FRAME2.append("g") 
+        .attr("transform", "translate(" + MARGINS.left + 
+              "," + (VIS_HEIGHT + MARGINS.top) + ")") 
+        .call(d3.axisBottom(X_SCALE2).ticks(7)) 
+          .attr("font-size", '10px');
+
+    FRAME2.append("g") 
+        .attr("transform", "translate(" + MARGINS.left + 
+              "," + (VIS_HEIGHT - 250) + ")") 
+        .call(d3.axisLeft(Y_SCALE2).ticks(10)) 
+          .attr("font-size", '10px');
+
+
+    const TOOLTIP = d3.select("#vis2")
+              .append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 1); 
+
+    // Define event handler functions for tooltips
+    function handleMouseover(event, d) {
+      // on mouseover, make opaque 
+        TOOLTIP.style("opacity", 1); 
+    }
+
+    function handleMousemove(event, d) {
+      // position the tooltip and fill in information 
+      TOOLTIP.html("Name: " + d.category + "<br>Value: " + d.amount)
+              .style("left", (event.pageX + 10) + "px") //add offset
+                                                            // from mouse
+              .style("top", (event.pageY - 50) + "px"); 
+    }
+  
+    function handleMouseleave(event, d) {
+      // on mouseleave, make transparant again 
+      TOOLTIP.style("opacity", 0); 
+    } 
+
+    // Add event listeners
+    FRAME2.selectAll(".bar")
+          .on("mouseover", handleMouseover) //add event listeners
+          .on("mousemove", handleMousemove)
+          .on("mouseleave", handleMouseleave);    
+
+  });
+}
+
+build_interactive_barplot();
