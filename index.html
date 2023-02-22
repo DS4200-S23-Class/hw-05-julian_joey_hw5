@@ -17,44 +17,51 @@
         <h1>hw-05: Interactive Graph with D3</h1>
     </div>
 
-    
-    <div class="column left">
-        <div id="vis1"></div>
-        <div id="vis2"></div>
+    <div class="row">
+        <div class="column left">
+            <div id="vis1"></div>
+            <div id="vis2"></div>
+        </div>
+        <div class="column right">
+            <p>Last Point Clicked:</p>
+            <p id="lastPoint">No Point Has Been Clicked</p>
+            <p>Select the x coordinate of the point you want to add:</p>
+            <select name = "xDropdown" id = "xDropdown" value = "1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <p>Select the y coordinate of the point you want to add:</p>
+            <select name = "yDropdown" id = "yDropdown" value = "1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
 
+            <button type="button" onclick="plotPoints()">Add Point</button>
+        </div>
     </div>
-    <div class="column right">
-        <p>Last Point Clicked:</p>
-        <p id="lastPoint">No Point Has Been Clicked</p>
-        <p>Select the x coordinate of the point you want to add:</p>
-        <select name = "xDropdown" id = "xDropdown" value = "1">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>
-        <p>Select the y coordinate of the point you want to add:</p>
-        <select name = "yDropdown" id = "yDropdown" value = "1">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>
-
-        <button type="button" onclick="plotPoints()">Add Point</button>
-        
+    <div>
+        <h2>Acknowledgements</h2>
+        <ul>
+            <li>https://observablehq.com/@d3/gallery</li>
+            <li>https://gramener.github.io/d3js-playbook/events.html</li>
+            <li>https://www.fluidencodings.com/teaching-materials/cc-for-the-web/v1/page.php?pid=svg</li>
+            <li>https://www.w3schools.com/js/js_if_else.asp</li>
+        </ul>
     </div>
-
     <script src='js/hw5main.js'></script>
 
 </body>
