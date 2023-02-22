@@ -35,7 +35,6 @@ d3.csv("/data/scatter-data.csv").then((data) => {
         .attr("cx", (d) => { return (X_SCALE2(d.x) + MARGINS.left); }) 
         .attr("cy", (d) => { return (Y_SCALE2(d.y) + MARGINS.bottom); }) 
         .attr("r", 10)
-        .attr("fill", "cyan")
         .attr("class", "point"); 
 
   d3.selectAll('circle')
@@ -44,9 +43,14 @@ d3.csv("/data/scatter-data.csv").then((data) => {
         d3.select(this)
           .style("stroke", "green");
         }
-      var text = "(" + d3.select(this).attr("cx") + "," + d3.select(this).attr("cy") + ")";
+      else {
+        d3.select(this)
+          .style("stroke", "none")
+      }
+      var text = "(" + ((d3.select(this).attr("cx") - MARGINS.left) / 40) + "," + (10 - ((d3.select(this).attr("cy") - MARGINS.bottom) / 30))+ ")";
       document.getElementById("lastPoint").textContent = text;
     });
+
   // Add an axis to the vis  
   FRAME1.append("g") 
         .attr("transform", "translate(" + MARGINS.left + 
